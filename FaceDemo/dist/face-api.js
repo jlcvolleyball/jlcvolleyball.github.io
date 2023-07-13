@@ -5674,6 +5674,7 @@
                                   var imagePatchTensor = Wl(Ln(data, [1, width, height, 3]), [0, 2, 1, 3]).toFloat();
                                   //return normalize$1(imagePatchTensor);
                                   return imagePatchTensor;
+                                  console.log("extractImagePatches didn't normalize");
                               });
                               return t;
                           })];
