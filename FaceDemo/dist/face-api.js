@@ -5672,7 +5672,8 @@
                       return [2 /*return*/, imagePatchesDatas.map(function (data) {
                               var t = Ze(function () {
                                   var imagePatchTensor = Wl(Ln(data, [1, width, height, 3]), [0, 2, 1, 3]).toFloat();
-                                  return normalize$1(imagePatchTensor);
+                                  //return normalize$1(imagePatchTensor);
+                                  return imagePatchTensor;
                               });
                               return t;
                           })];
