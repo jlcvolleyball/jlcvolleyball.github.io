@@ -27,6 +27,11 @@ class ImageMode extends Mode {
     let buttonClose = $(`<a href="#!" class="waves-effect waves-light btn blue" style="margin-right: 10px;">Close</a>`).appendTo(this._slideOut.root());
     buttonClose.get(0).addEventListener('click', () => { this._slideOut.close(); });
 
+    //add remove image button
+    let buttonRemove = $(`<a href="#!" class="waves-effect waves-light btn blue" style="margin-right: 10px;">Remove</a>`).appendTo(this._slideOut.root());
+    buttonRemove.get(0).addEventListener('click', () => { this._slideOut.close(); });
+    console.log("buttonRemove")
+
     let masterColumn = $(`<div class="column center-content""></div>`).appendTo(parent);
 
     let row = $(`<div class="row side-by-side" style="position: relative; margin-bottom: 0px; align-items: start;"></div>`).appendTo(masterColumn);
