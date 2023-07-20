@@ -4920,6 +4920,10 @@
                         return Math.min.apply(Math, row);
                     });
                     var min = Math.min.apply(null, minRow);
+                    // *** BEGIN: USE FIXED RESCALING INSTEAD OF NORMALIZATION
+                    console.log('max=',max,'   min=',min);
+                    max = 0.25; min = -0.05;
+                    // *** END
                     saveconv = saveconv.map(function (x) {
                         return x.map(function (y) {
                             return ((y - min) * 255) / (max - min);
@@ -5633,7 +5637,7 @@
       };
   }
 
-  function extractImagePatches(img, boxes, _a) {
+  function extractImagePatches(img, boxes, _a) {getGrayscale_maxN
       var width = _a.width, height = _a.height;
       return __awaiter(this, void 0, void 0, function () {
           var imgCtx, bitmaps, imagePatchesDatas;
