@@ -29,7 +29,7 @@ class ImageMode extends Mode {
 
     //add remove image button
     let buttonRemove = $(`<a href="#!" class="waves-effect waves-light btn blue" style="margin-right: 10px;">Remove</a>`).appendTo(this._slideOut.root());
-    buttonRemove.get(0).addEventListener('click', () => { this._slideOut.close(); });
+    buttonRemove.get(0).addEventListener('click', () => { this._onRemoveImage() });
 
     //add clear all images button
     let buttonClear = $(`<a href="#!" class="waves-effect waves-light btn blue" style="margin-right: 10px;">Clear</a>`).appendTo(this._slideOut.root());
@@ -212,21 +212,27 @@ class ImageMode extends Mode {
     this._setFeed(select.value());
   }
 
-  _onRemoveImage(select) {
-
+  _onRemoveImage() {
+    var elementsToRemove = document.querySelectorAll(".thumbnail.selected")
+    if(elementsToRemove.length > 0) {
+      for(var i=0; i<elementsToRemove.length; i++) {
+        var element = elementsToRemove[i];
+        element.parentNode.removeChild(element);
+      }
+    }
   }
 
   _onClearImage() {
     app.imageLibrary().clearImages()
     this._imagePicker.initialize(app.imageLibrary().nImages() - 1)
-    //this._setFeed(app.imageLibrary().nImages() - 1)
+    this._setFeed(app.imageLibrary().nImages() - 1)
     console.log("clearing image")
   }
 
   _onDefaultImages() {
     app.imageLibrary().resetDefaultImages()
     this._imagePicker.initialize(app.imageLibrary().nImages() - 1);
-    //this._setFeed(app.imageLibrary().nImages() - 1);
+    this._setFeed(app.imageLibrary().nImages() - 1);
     console.log("setting images to default")
   }
 
