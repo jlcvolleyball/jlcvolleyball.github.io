@@ -30,12 +30,14 @@ class ImageMode extends Mode {
     //add remove image button
     let buttonRemove = $(`<a href="#!" class="waves-effect waves-light btn blue" style="margin-right: 10px;">Remove</a>`).appendTo(this._slideOut.root());
     buttonRemove.get(0).addEventListener('click', () => { this._slideOut.close(); });
-    console.log("buttonRemove")
 
     //add clear all images button
     let buttonClear = $(`<a href="#!" class="waves-effect waves-light btn blue" style="margin-right: 10px;">Clear</a>`).appendTo(this._slideOut.root());
     buttonClear.get(0).addEventListener('click', () => { this._slideOut.close(); });
-    console.log("buttonClear")
+
+    //add reset default images button
+    let buttonDefault = $(`<a href="#!" class="waves-effect waves-light btn blue" style="margin-right: 10px;">Clear</a>`).appendTo(this._slideOut.root());
+    buttonDefault.get(0).addEventListener('click', () => { this._slideOut.close(); });
 
     let masterColumn = $(`<div class="column center-content""></div>`).appendTo(parent);
 
