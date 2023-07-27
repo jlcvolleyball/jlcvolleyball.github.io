@@ -217,7 +217,7 @@ class ImageMode extends Mode {
   }
 
   _onClearImage() {
-    this.imageLibrary().clearImages()
+    app.imageLibrary().clearImages()
     this._imagePicker.initialize(app.imageLibrary().nImages() - 1)
     this.setFeed(app.imageLibrary().nImages() - 1)
     console.log("clearing image")
