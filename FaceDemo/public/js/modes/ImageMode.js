@@ -33,11 +33,11 @@ class ImageMode extends Mode {
 
     //add clear all images button
     let buttonClear = $(`<a href="#!" class="waves-effect waves-light btn blue" style="margin-right: 10px;">Clear</a>`).appendTo(this._slideOut.root());
-    buttonClear.get(0).addEventListener('click', () => { this._slideOut.close(); });
+    buttonClear.get(0).addEventListener('click', () => { this._onClearImage().click() });
 
     //add reset default images button
-    let buttonDefault = $(`<a href="#!" class="waves-effect waves-light btn blue" style="margin-right: 10px;">Clear</a>`).appendTo(this._slideOut.root());
-    buttonDefault.get(0).addEventListener('click', () => { this._slideOut.close(); });
+    let buttonDefault = $(`<a href="#!" class="waves-effect waves-light btn blue" style="margin-right: 10px;">Reset Default</a>`).appendTo(this._slideOut.root());
+    buttonDefault.get(0).addEventListener('click', () => { this._onDefaultImages().click() });
 
     let masterColumn = $(`<div class="column center-content""></div>`).appendTo(parent);
 
@@ -208,8 +208,20 @@ class ImageMode extends Mode {
   }
 
   _onImagePickerClose(select) {
-    this._slideOut.close();
+    //this._slideOut.close();
     this._setFeed(select.value());
+  }
+
+  _onRemoveImage(select) {
+
+  }
+
+  _onClearImage() {
+    this.imageLibrary().clearImages()
+  }
+
+  _onDefaultImages() {
+    this.imageLibrary().resetDefaultImages()
   }
 
   _onCropModalClose(url) {
@@ -219,7 +231,7 @@ class ImageMode extends Mode {
       app.imageLibrary().add("Uploaded image", url);
       this._imagePicker.initialize(app.imageLibrary().nImages() - 1);
       this._setFeed(app.imageLibrary().nImages() - 1);
-      // this._slideOut.close();
+      this._slideOut.close();
     }
   }
 
