@@ -219,14 +219,14 @@ class ImageMode extends Mode {
   _onClearImage() {
     app.imageLibrary().clearImages()
     this._imagePicker.initialize(app.imageLibrary().nImages() - 1)
-    this._setFeed(app.imageLibrary().nImages() - 1)
+    //this._setFeed(app.imageLibrary().nImages() - 1)
     console.log("clearing image")
   }
 
   _onDefaultImages() {
     app.imageLibrary().resetDefaultImages()
     this._imagePicker.initialize(app.imageLibrary().nImages() - 1);
-    this._setFeed(app.imageLibrary().nImages() - 1);
+    //this._setFeed(app.imageLibrary().nImages() - 1);
     console.log("setting images to default")
   }
 
