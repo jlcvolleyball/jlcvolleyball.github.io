@@ -32,6 +32,11 @@ class ImageMode extends Mode {
     buttonRemove.get(0).addEventListener('click', () => { this._slideOut.close(); });
     console.log("buttonRemove")
 
+    //add clear all images button
+    let buttonClear = $(`<a href="#!" class="waves-effect waves-light btn blue" style="margin-right: 10px;">Clear</a>`).appendTo(this._slideOut.root());
+    buttonClear.get(0).addEventListener('click', () => { this._slideOut.close(); });
+    console.log("buttonClear")
+
     let masterColumn = $(`<div class="column center-content""></div>`).appendTo(parent);
 
     let row = $(`<div class="row side-by-side" style="position: relative; margin-bottom: 0px; align-items: start;"></div>`).appendTo(masterColumn);
@@ -212,7 +217,7 @@ class ImageMode extends Mode {
       app.imageLibrary().add("Uploaded image", url);
       this._imagePicker.initialize(app.imageLibrary().nImages() - 1);
       this._setFeed(app.imageLibrary().nImages() - 1);
-      this._slideOut.close();
+      // this._slideOut.close();
     }
   }
 
