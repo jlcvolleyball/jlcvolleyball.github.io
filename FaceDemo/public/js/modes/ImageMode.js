@@ -3,12 +3,15 @@ class ImageMode extends Mode {
     super(options);
 
     this._cropModal = new CropModal(document.getElementById('body'), this._options.imageWidth, this._options.imageHeight, {
-      onClose: (url) => { this._onCropModalClose(url); }
+      onClose: (url) => {
+        this._onCropModalClose(url);
+      }
     });
 
     this._slideOut = null;
     this._imagePicker = null;
     this._removeBtn = null;
+    this.buttonToggleThreshold = null;
   }
 
   async setup(parent) {
@@ -17,19 +20,27 @@ class ImageMode extends Mode {
 
     let uploadControlDiv = $(`<div></div>`).appendTo(parent);
     this._imageUploadInput = $(`<input accept="image/*" class="form-control" type="file" style="display: none;">`).appendTo(uploadControlDiv).get(0);
-    this._imageUploadInput.addEventListener('change', () => { this._imageInputChanged() });
+    this._imageUploadInput.addEventListener('change', () => {
+      this._imageInputChanged()
+    });
 
     this._slideOut = new SlideOut(document.getElementById('body'));
-    this._imagePicker = new ImagePicker((select) => { this._onImagePickerClose(select); });
+    this._imagePicker = new ImagePicker((select) => {
+      this._onImagePickerClose(select);
+    });
     this._imagePicker.setup(this._slideOut.root());
 
     let buttonAdd = $(`<a href="#!" class="waves-effect waves-light btn blue" style="margin-right: 10px;">Add</a>`).appendTo(this._slideOut.root());
-    buttonAdd.get(0).addEventListener('click', () => { this._imageUploadInput.click() });
+    buttonAdd.get(0).addEventListener('click', () => {
+      this._imageUploadInput.click()
+    });
 
 
     //add remove image button
     let buttonRemove = $(`<a href="#!" class="waves-effect waves-light btn blue" style="margin-right: 10px;">Remove</a>`).appendTo(this._slideOut.root());
-    buttonRemove.get(0).addEventListener('click', () => { this._onRemoveImage() });
+    buttonRemove.get(0).addEventListener('click', () => {
+      this._onRemoveImage()
+    });
     // let check_vid = document.querySelectorAll(".thumbnail.first.selected")
     // console.log(check_vid.length)
     // if(check_vid.length > 0) {
@@ -42,15 +53,21 @@ class ImageMode extends Mode {
 
     //add clear all images button
     let buttonClear = $(`<a href="#!" class="waves-effect waves-light btn red" style="margin-right: 10px;">Remove All</a>`).appendTo(this._slideOut.root());
-    buttonClear.get(0).addEventListener('click', () => { this._onClearImage() });
+    buttonClear.get(0).addEventListener('click', () => {
+      this._onClearImage()
+    });
 
     //add reset default images button
     let buttonDefault = $(`<a href="#!" class="waves-effect waves-light btn red" style="margin-right: 10px;">Reset to Default</a>`).appendTo(this._slideOut.root());
-    buttonDefault.get(0).addEventListener('click', () => { this._onDefaultImages() });
+    buttonDefault.get(0).addEventListener('click', () => {
+      this._onDefaultImages()
+    });
     $(`<br> </br>`).appendTo(this._slideOut.root())
 
     let buttonClose = $(`<a href="#!" class="waves-effect waves-light btn blue" style="margin-right: 10px;">Close</a>`).appendTo(this._slideOut.root());
-    buttonClose.get(0).addEventListener('click', () => { this._slideOut.close(); });
+    buttonClose.get(0).addEventListener('click', () => {
+      this._slideOut.close();
+    });
 
     let masterColumn = $(`<div class="column center-content""></div>`).appendTo(parent);
 
@@ -87,25 +104,40 @@ class ImageMode extends Mode {
     let overlay = $(`<canvas class="overlay" width=${w} height=${h}/>`).appendTo(holder1);
     let controlsHolder = $(`<div class="overlay column center-contents"></div>`).appendTo(holder1);
     let buttonSwitchToVideo = $('<a class="btn-floating btn-small waves-effect waves-light blue tooltipped" data-position="right" data-tooltip="Switch to Video" style="margin-bottom: 2px;"><i class="material-icons">videocam</i></a>').appendTo(controlsHolder);
-    buttonSwitchToVideo.get(0).addEventListener('click', () => { this._setFeed(0) });
+    buttonSwitchToVideo.get(0).addEventListener('click', () => {
+      this._setFeed(0)
+    });
     this._imageElements.push(buttonSwitchToVideo.get(0));
 
     this._captureImageCanvas = $(`<canvas width=${w} height=${h} style="display: none;"/>`).appendTo(controlsHolder).get(0);
     let buttonToggle = $(`<a data-playing="true" style="margin-bottom: 2px;" class="btn-floating btn-small waves-effect waves-light blue tooltipped" data-position="right" data-tooltip="Pause/Resume Video"></a>`).appendTo(controlsHolder);
     this._buttonToggleVideo = buttonToggle.get(0);
     this._videoElements.push(this._buttonToggleVideo);
-    this._buttonToggleVideo.addEventListener('click', () => { this._toggleVideo() });
+    this._buttonToggleVideo.addEventListener('click', () => {
+      this._toggleVideo()
+    });
     this._buttonToggleVideoIcon = $(`<i class="material-icons">pause</i>`).appendTo(buttonToggle).get(0);
     let buttonCapture = $(`<a style="margin-bottom: 2px;" class="btn-floating btn-small waves-effect waves-light blue tooltipped" data-position="right" data-tooltip="Capture Image"><i class="material-icons">camera_alt</i></a>`).appendTo(controlsHolder);
     this._videoElements.push(buttonCapture.get(0));
-    buttonCapture.get(0).addEventListener('click', () => { this._captureImage() });
+    buttonCapture.get(0).addEventListener('click', () => {
+      this._captureImage()
+    });
 
     let buttonLib = $('<a style="margin-bottom: 2px;" class="btn-floating btn-small waves-effect waves-light blue tooltipped" data-position="right" data-tooltip="Image Library" style="margin-bottom: 2px;"><i class="material-icons">photo_library</i></a>').appendTo(controlsHolder);
     // let buttonLib = $('#buttonLib');
-    buttonLib.get(0).addEventListener('click', () => { this._slideOut.open() });
+    buttonLib.get(0).addEventListener('click', () => {
+      this._slideOut.open()
+    });
 
     let buttonAddInline = $('<a style="margin-bottom: 2px;" class="btn-floating btn-small waves-effect waves-light blue tooltipped" data-position="right" data-tooltip="Add Image" style="margin-bottom: 2px;"><i class="material-icons">file_upload</i></a>').appendTo(controlsHolder);
-    buttonAddInline.get(0).addEventListener('click', () => { this._imageUploadInput.click() });
+    buttonAddInline.get(0).addEventListener('click', () => {
+      this._imageUploadInput.click()
+    });
+
+    this.buttonToggleThreshold = $('<a style="margin-bottom: 2px;" class="btn-floating btn-small waves-effect waves-light blue tooltipped" data-position="right" data-tooltip="Decrease detector threshold" style="margin-bottom: 2px;"><i id="icon" class="material-icons">remove</i></a>').appendTo(controlsHolder);
+    this.buttonToggleThreshold.get(0).addEventListener('click', () => {
+      this._toggleThreshold()
+    })
 
     this._parentResultOutput = $(`<div></div>`).appendTo(div).get(0);
 
@@ -124,14 +156,16 @@ class ImageMode extends Mode {
     $(`<h5 style="text-align: center; margin-top: -4px;">Max-Pooling Layer</h5>`).appendTo(horizontalTitleAndControls);
 
     let layer_options = [
-      { value: 3, name: '3' },
-      { value: 4, name: '4', selected: true },
-      { value: 5, name: '5' },
+      {value: 3, name: '3'},
+      {value: 4, name: '4', selected: true},
+      {value: 5, name: '5'},
 //      { value: 6, name: '6' }
     ];
     this._hozizontalOutputSelect = App.setupSelect(horizontalTitleAndControls, 50, null, null, layer_options);
 
-    this._hozizontalOutputSelect.addEventListener('change', () => { this._onHorizontalOutputSelectChange(); })
+    this._hozizontalOutputSelect.addEventListener('change', () => {
+      this._onHorizontalOutputSelectChange();
+    })
 
     this._horizontalOutputBody = $(`<div></div>`).appendTo(this._parentHorizontalOutput).get(0);
     this._onHorizontalOutputSelectChange(); // simulate the firing of the event for initial set up
@@ -185,13 +219,22 @@ class ImageMode extends Mode {
   async _setFeed(index) {
     if (index == 0) {
       // video
-      
-      this._videoElements.forEach((el) => { el.style.display = "block"; });
-      this._imageElements.forEach((el) => { el.style.display = "none"; });
+
+      this._videoElements.forEach((el) => {
+        el.style.display = "block";
+      });
+      this._imageElements.forEach((el) => {
+        el.style.display = "none";
+      });
 
       let stream = null;
       try {
-        stream = await navigator.mediaDevices.getUserMedia({ video: { width: this._options.imageWidth, height: this._options.imageHeight } })
+        stream = await navigator.mediaDevices.getUserMedia({
+          video: {
+            width: this._options.imageWidth,
+            height: this._options.imageHeight
+          }
+        })
       } catch (e) {
         console.log(e);
         console.log("Unable to setup video stream");
@@ -200,13 +243,19 @@ class ImageMode extends Mode {
       this._video.srcObject = stream;
 
       this._feed = this._video;
-      this._outputs.forEach((o) => { o.setFeed(this._video); });
+      this._outputs.forEach((o) => {
+        o.setFeed(this._video);
+      });
       this._image.src = null;
     } else {
       // image
 
-      this._videoElements.forEach((el) => { el.style.display = "none"; });
-      this._imageElements.forEach((el) => { el.style.display = "block"; });
+      this._videoElements.forEach((el) => {
+        el.style.display = "none";
+      });
+      this._imageElements.forEach((el) => {
+        el.style.display = "block";
+      });
 
       let url = app.imageLibrary().imagePath(index);
       this._image.onload = () => {
@@ -233,8 +282,8 @@ class ImageMode extends Mode {
 
   _onRemoveImage() {
     var elementsToRemove = document.querySelectorAll(".thumbnail.selected")
-    if(elementsToRemove.length > 0) {
-      for(var i=0; i<elementsToRemove.length; i++) {
+    if (elementsToRemove.length > 0) {
+      for (var i = 0; i < elementsToRemove.length; i++) {
         var element = elementsToRemove[i];
         element.parentNode.removeChild(element);
       }
@@ -305,25 +354,41 @@ class ImageMode extends Mode {
   _onImageSelectChange() {
     var selected = document.querySelectorAll(".thumbnail.selected")
     let shouldDisableRemove = false;
-    if(selected.length > 0) {
-      for(var i=0; i<selected.length; i++) {
+    if (selected.length > 0) {
+      for (var i = 0; i < selected.length; i++) {
         var element = selected[i];
-        if(element.parentNode.classList.contains("first")) {
+        if (element.parentNode.classList.contains("first")) {
           shouldDisableRemove = true;
           break;
         }
       }
-    }
-    else
+    } else
       shouldDisableRemove = true;
 
     //self._removeBtn.get(0).style.display = shouldDisableRemove? "none" : "";
-    if(shouldDisableRemove)
-    {
-      if(!self._removeBtn.get(0).classList.contains("disabled"))
+    if (shouldDisableRemove) {
+      if (!self._removeBtn.get(0).classList.contains("disabled"))
         self._removeBtn.get(0).classList.add("disabled");
-    }
-    else
+    } else
       self._removeBtn.get(0).classList.remove("disabled");
+  }
+
+  _toggleThreshold() {
+    var icon = document.getElementById('icon')
+    if (window.detector_threshold==0.01) { //currently lowered threshold value
+      window.detector_threshold = 0.2
+      console.log("increased threshold to " + window.detector_threshold)
+      this.buttonToggleThreshold[0].classList.remove('red')
+      this.buttonToggleThreshold[0].classList.add('blue')
+      icon.textContent = "remove"
+      this.buttonToggleThreshold[0].dataset.tooltip = "Decrease detector threshold"
+    } else {
+      window.detector_threshold = 0.01
+      console.log("decreased threshold to " + window.detector_threshold)
+      this.buttonToggleThreshold[0].classList.remove('blue')
+      this.buttonToggleThreshold[0].classList.add('red')
+      icon.textContent = "add"
+      this.buttonToggleThreshold[0].dataset.tooltip = "Increase detector threshold"
+    }
   }
 }

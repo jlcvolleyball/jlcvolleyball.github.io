@@ -1,3 +1,4 @@
+window.detector_threshold = 0.2
 class ResultOutput extends Output {
   constructor(parent, overlay) {
     super();
@@ -46,7 +47,7 @@ class ResultOutput extends Output {
             ctx.strokeRect(i * 64, j * 64, 64, 64);
             for (let k = 0; k < 5; k++) {
               const score = scores[i][j][k];
-              if (score > 0.01) {
+              if (score > detector_threshold) {
                 const box = boxes[i][j][k];
                 const x = box[0] * this._feed.width;
                 const y = box[1] * this._feed.height;
@@ -54,7 +55,7 @@ class ResultOutput extends Output {
                 const h = box[3] * this._feed.height;
                 ctx.lineWidth = Math.floor(score * 10);
                 ctx.strokeStyle = colors[k];
-                console.log("k value: " + k)
+                // console.log("k value: " + k)
                 ctx.strokeRect(x, y, w, h);
                 ctx.lineWidth = 4;
                 ctx.strokeRect(x + w / 2, y + h / 2, 4, 4);

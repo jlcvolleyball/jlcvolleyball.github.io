@@ -4921,7 +4921,7 @@
                     });
                     var min = Math.min.apply(null, minRow);
                     // *** BEGIN: USE FIXED RESCALING INSTEAD OF NORMALIZATION
-                    console.log('max=',max,'   min=',min);
+                    // console.log('max=',max,'   min=',min);
                     max = 0.25; min = -0.05;
                     // *** END
                     saveconv = saveconv.map(function (x) {
